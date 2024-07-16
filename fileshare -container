@@ -1,0 +1,61 @@
+task 1 : Mounting the file share
+
+create VM 
+CREATE Storage account 
+file share
+in file share connect copy the Linux script 
+connect the vm 
+create a bash file and run the script 
+add the files to the mounted file share
+
+
+
+root@res-one:/mnt/my-file-share# history
+    1  yum install cifs-utils -y
+    2  apt install cifs-utils -y
+    3  vim san.sh
+    4  chmod u+x san.sh
+    5  ./san.sh
+    6  df -h
+    7  cd /mnt/my-file-share
+    8  touch kv.txt{1..10}
+    9  ll
+   10  history
+
+
+
+Task : Mounting Containers
+create VM 
+CREATE Storage account
+create container
+to change permissions
+Goto storage account > settings>configuration > enable blob access >save 
+
+container>change access level
+blob access > copy url to check 
+
+to mount container on vm 
+ 
+
+
+https://learn.microsoft.com/en-us/azure/storage/blobs/storage-how-to-mount-container-linux?tabs=Ubuntu
+ cd
+   12  sudo wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+   13  sudo dpkg -i packages-microsoft-prod.deb
+   14  sudo apt-get update
+   15  sudo apt-get install blobfuse
+   16  sudo mkdir /mnt/resource/blobfusetmp -p
+   17  vim /etc/fuse_connection.cfg
+   18  cd /etc/
+   19  mv /fuse_connection.cfg /root
+   20  mv fuse_connection.cfg /root
+   21  ll
+   22  cd /root
+   23  ll
+   24  chmod 600 fuse_connection.cfg
+   25  sudo mkdir ~/mycontainer
+
+28  sudo blobfuse ~/mycontainer --tmp-path=/mnt/resource/blobfusetmp  --config-file=/root/fuse_connection.cfg -o attr_timeout=240 -o entry_timeout=240 -o negative_timeout=120
+   29  df -h
+
+
