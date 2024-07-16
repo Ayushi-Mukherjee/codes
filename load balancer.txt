@@ -1,0 +1,28 @@
+create resource group
+create vm,resource group,zone,os,securityport(ssh,http)default storage, review+create
+validate passed, create
+2vm for load balancer for the same process(differentzone) but same availability regions
+connect 2 vm in the terminals ssh azure@pubip
+apt-get update
+apt install apache2 -y
+cd /var/www/html
+echo "this is ..." >index.html
+ll
+service apache2 start -->copy public-ip browse
+
+load balancer:
+create->same resourcegroup-> same region -->standard--> pub--> frontend-->
+review create
+go to source settings-> backendpool -->
+add chose any one vm -> ip ->sameip &resource name
+
+health probe ->add->name->tcp 80, 5 sec ->create
+add load balancing rule 
+->add ->name->lb:rule->ip version->ipv4
+port:80,balanced port->79,health probe->create
+then disassociate pubip for both
+
+vm->networksettings->publicips->dissassociate->yes-> then delete
+add Nat ->add->mynatrules(name)->AVM->TARGET(ONLYONE MACHINE)->ip config->
+my frontendip->22/70-> 70/22(backend)->custom tcp ->4
+go to frontend ip ->check->paste in chrome
